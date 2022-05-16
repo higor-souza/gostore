@@ -1,19 +1,11 @@
 package main
 
 import (
-	"gostore/models"
-	"html/template"
+	"gostore/routes"
 	"net/http"
 )
 
-var temp = template.Must(template.ParseGlob("templates/*.html")) //Carrega todos os templates do diretório.
-
 func main() {
-	http.HandleFunc("/", index)
+	routes.CarregaRotas()
 	http.ListenAndServe(":8000", nil)
-}
-
-func index(w http.ResponseWriter, r *http.Request) {
-	todosOsProdutos := models.BuscaTodosOsProdutos()
-	temp.ExecuteTemplate(w, "Index", todosOsProdutos)
 }
